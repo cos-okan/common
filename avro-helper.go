@@ -20,12 +20,12 @@ func PrepareAvroHelper() {
 }
 
 func prepareAvroSchema(avroSchemaFilePath string) (schema avro.Schema, err error) {
-	twrAvroSchemaByte, err := os.ReadFile(avroSchemaFilePath)
+	avroSchemaByte, err := os.ReadFile(avroSchemaFilePath)
 	if err != nil {
 		log.Fatal(err)
 	}
 
-	schema, err = avro.Parse(string(twrAvroSchemaByte))
+	schema, err = avro.Parse(string(avroSchemaByte))
 	if err != nil {
 		log.Fatal(err)
 	}

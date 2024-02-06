@@ -17,6 +17,7 @@ type RedpandaConsumer struct {
 }
 
 func NewRedpandaProducer(brokers []string, topic string) *RedpandaProducer {
+	PrepareAvroHelper()
 	client, err := kgo.NewClient(
 		kgo.SeedBrokers(brokers...),
 	)
