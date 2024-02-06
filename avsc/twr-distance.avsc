@@ -1,0 +1,12 @@
+{
+  "type": "record",
+    "name": "twrDistance",
+    "fields" : [
+        {"name": "fromNodeId", "type": "int"},
+				{"name": "toNodeId", "type": "int"},
+        {"name": "messageNo", "type": "int"},
+        {"name": "distance", "type": "int"},
+				{"name": "fwConfidenceLevel", "type": "int"},
+				{"name": "timestamp", "type": {"type": "long","logicalType": "timestamp-millis"}}
+    ]
+}

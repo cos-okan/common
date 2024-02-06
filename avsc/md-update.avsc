@@ -1,0 +1,109 @@
+{
+  "type": "record",
+  "name": "mdUpdate",
+  "fields": [
+    {
+      "name": "operation",
+      "type": "int"
+    },
+    {
+      "name": "dataType",
+      "type": "int"
+    },
+    {
+      "name": "key",
+      "type": "string"
+    },
+    {
+      "name": "timestamp",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      }
+    },
+    {
+      "name": "tag",
+      "type": "int"
+    },
+    {
+      "name": "entity",
+      "type": {
+        "type": "record",
+        "name": "entity",
+        "fields": [
+          {
+            "name": "id",
+            "type": "int"
+          },
+          {
+            "name": "height",
+            "type": "int"
+          },
+          {
+            "name": "tagId",
+            "type": "int"
+          },
+          {
+            "name": "maxSpeed",
+            "type": "int"
+          },
+          {
+            "name": "type",
+            "type": "int"
+          }
+        ]
+      }
+    },
+    {
+      "name": "anchor",
+      "type": {
+        "type": "record",
+        "name": "anchor",
+        "fields": [
+          {
+            "name": "id",
+            "type": "int"
+          },
+          {
+            "name": "location",
+            "type": {
+              "type": "record",
+              "name": "location",
+              "fields": [
+                {
+                  "name": "floorId",
+                  "type": "int"
+                },
+                {
+                  "name": "point",
+                  "type": {
+                    "type": "record",
+                    "name": "point",
+                    "fields": [
+                      {
+                        "name": "x",
+                        "type": "int"
+                      },
+                      {
+                        "name": "y",
+                        "type": "int"
+                      },
+                      {
+                        "name": "z",
+                        "type": "int"
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "range",
+            "type": "int"
+          }
+        ]
+      }
+    }
+  ]
+}
