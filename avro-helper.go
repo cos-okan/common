@@ -68,5 +68,5 @@ func (mdu *MasterDataUpdate) AvroDeserializer(data []byte) (err error) {
 }
 
 func (pd *ProcessedDistance) AvroDeserializer(data []byte) (err error) {
-	return avro.Unmarshal(twrDistanceAvroSchema, data, &pd)
+	return avro.Unmarshal(processedDistanceAvroSchema, data, &pd)
 }
