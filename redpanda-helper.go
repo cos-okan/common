@@ -12,7 +12,7 @@ type RedpandaProducer struct {
 }
 
 type RedpandaConsumer struct {
-	client *kgo.Client
+	Client *kgo.Client
 	topic  string
 }
 
@@ -37,7 +37,7 @@ func NewRedpandaConsumer(brokers []string, topic string, twrConsumerGroupID stri
 	if err != nil {
 		panic(err)
 	}
-	return &RedpandaConsumer{client: client, topic: topic}
+	return &RedpandaConsumer{Client: client, topic: topic}
 }
 
 func (p *RedpandaProducer) SendAvroMessage(rpm RedpandaEvent) {
