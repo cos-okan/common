@@ -1,8 +1,8 @@
 package common
 
 import (
+	"embed"
 	"log"
-	"os"
 
 	"github.com/hamba/avro/v2"
 )
@@ -13,14 +13,17 @@ var (
 	processedDistanceAvroSchema avro.Schema
 )
 
+//go:embed avsc/*
+var avsc embed.FS
+
 func PrepareAvroHelper() {
-	twrDistanceAvroSchema, _ = prepareAvroSchema("./avsc/twr-distance.avsc")
-	mdUpdateAvroSchema, _ = prepareAvroSchema("./avsc/md-update.avsc")
-	processedDistanceAvroSchema, _ = prepareAvroSchema("./avsc/processed-distance.avsc")
+	twrDistanceAvroSchema, _ = prepareAvroSchema("avsc/twr-distance.avsc")
+	mdUpdateAvroSchema, _ = prepareAvroSchema("avsc/md-update.avsc")
+	processedDistanceAvroSchema, _ = prepareAvroSchema("avsc/processed-distance.avsc")
 }
 
 func prepareAvroSchema(avroSchemaFilePath string) (schema avro.Schema, err error) {
-	avroSchemaByte, err := os.ReadFile(avroSchemaFilePath)
+	avroSchemaByte, err := avsc.ReadFile(avroSchemaFilePath)
 	if err != nil {
 		log.Fatal(err)
 	}
