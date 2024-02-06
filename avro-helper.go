@@ -58,3 +58,15 @@ func (pd *ProcessedDistance) AvroSerializer() (data []byte, err error) {
 	}
 	return
 }
+
+func (td *TwrDistance) AvroDeserializer(data []byte) (err error) {
+	return avro.Unmarshal(twrDistanceAvroSchema, data, &td)
+}
+
+func (mdu *MasterDataUpdate) AvroDeserializer(data []byte) (err error) {
+	return avro.Unmarshal(mdUpdateAvroSchema, data, &mdu)
+}
+
+func (pd *ProcessedDistance) AvroDeserializer(data []byte) (err error) {
+	return avro.Unmarshal(twrDistanceAvroSchema, data, &pd)
+}

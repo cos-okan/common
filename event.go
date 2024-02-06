@@ -4,6 +4,7 @@ import "time"
 
 type RedpandaEvent interface {
 	AvroSerializer() (data []byte, err error)
+	AvroDeserializer() (err error)
 }
 
 type TwrDistance struct {
