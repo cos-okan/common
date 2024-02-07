@@ -40,7 +40,7 @@ func NewRedpandaConsumer(brokers []string, topic string, twrConsumerGroupID stri
 	return &RedpandaConsumer{Client: client, topic: topic}
 }
 
-func (p *RedpandaProducer) SendAvroMessage(rpm RedpandaEvent) {
+func (p *RedpandaProducer) SendAvroMessage(rpm AvroEvent, key []byte) {
 	ctx := context.Background()
 
 	serializedData, err := rpm.AvroSerializer()
@@ -48,5 +48,15 @@ func (p *RedpandaProducer) SendAvroMessage(rpm RedpandaEvent) {
 	if err != nil {
 		return
 	}
-	p.client.Produce(ctx, &kgo.Record{Topic: p.topic, Value: serializedData}, nil)
+
+	record := kgo.Record{
+		Topic: p.topic,
+		Value: serializedData,
+	}
+
+	if key != nil {
+		record.Key = key
+	}
+
+	p.client.Produce(ctx, &record, nil)
 }

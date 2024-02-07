@@ -34,39 +34,3 @@ func prepareAvroSchema(avroSchemaFilePath string) (schema avro.Schema, err error
 	}
 	return
 }
-
-func (td *TwrDistance) AvroSerializer() (data []byte, err error) {
-	data, err = avro.Marshal(twrDistanceAvroSchema, td)
-	if err != nil {
-		log.Fatal(err)
-	}
-	return
-}
-
-func (mdu *MasterDataUpdate) AvroSerializer() (data []byte, err error) {
-	data, err = avro.Marshal(mdUpdateAvroSchema, mdu)
-	if err != nil {
-		log.Fatal(err)
-	}
-	return
-}
-
-func (pd *ProcessedDistance) AvroSerializer() (data []byte, err error) {
-	data, err = avro.Marshal(processedDistanceAvroSchema, pd)
-	if err != nil {
-		log.Fatal(err)
-	}
-	return
-}
-
-func (td *TwrDistance) AvroDeserializer(data []byte) (err error) {
-	return avro.Unmarshal(twrDistanceAvroSchema, data, &td)
-}
-
-func (mdu *MasterDataUpdate) AvroDeserializer(data []byte) (err error) {
-	return avro.Unmarshal(mdUpdateAvroSchema, data, &mdu)
-}
-
-func (pd *ProcessedDistance) AvroDeserializer(data []byte) (err error) {
-	return avro.Unmarshal(processedDistanceAvroSchema, data, &pd)
-}

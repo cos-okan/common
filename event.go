@@ -1,8 +1,13 @@
 package common
 
-import "time"
+import (
+	"log"
+	"time"
 
-type RedpandaEvent interface {
+	"github.com/hamba/avro/v2"
+)
+
+type AvroEvent interface {
 	AvroSerializer() (data []byte, err error)
 	AvroDeserializer(data []byte) (err error)
 }
@@ -29,4 +34,50 @@ type ProcessedDistance struct {
 	IsLong             bool        `avro:"isLong"`
 	OnAnchor           bool        `avro:"onAnchor"`
 	ConfidenceLevel    int         `avro:"confidenceLevel"`
+}
+
+type MasterDataUpdate struct {
+	Operation int       `avro:"operation"`
+	DataType  int       `avro:"dataType"`
+	Key       string    `avro:"key"`
+	Anchor    Anchor    `avro:"anchor"`
+	Tag       int       `avro:"tag"`
+	Entity    Entity    `avro:"entity"`
+	Timestamp time.Time `avro:"timestamp"`
+}
+
+func (td *TwrDistance) AvroSerializer() (data []byte, err error) {
+	data, err = avro.Marshal(twrDistanceAvroSchema, td)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return
+}
+
+func (td *TwrDistance) AvroDeserializer(data []byte) (err error) {
+	return avro.Unmarshal(twrDistanceAvroSchema, data, &td)
+}
+
+func (pd *ProcessedDistance) AvroSerializer() (data []byte, err error) {
+	data, err = avro.Marshal(processedDistanceAvroSchema, pd)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return
+}
+
+func (pd *ProcessedDistance) AvroDeserializer(data []byte) (err error) {
+	return avro.Unmarshal(processedDistanceAvroSchema, data, &pd)
+}
+
+func (mdu *MasterDataUpdate) AvroSerializer() (data []byte, err error) {
+	data, err = avro.Marshal(mdUpdateAvroSchema, mdu)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return
+}
+
+func (mdu *MasterDataUpdate) AvroDeserializer(data []byte) (err error) {
+	return avro.Unmarshal(mdUpdateAvroSchema, data, &mdu)
 }

@@ -1,9 +1,5 @@
 package common
 
-import (
-	"time"
-)
-
 type MasterData struct {
 	Anchors  map[string]Anchor
 	Tags     map[string]int
@@ -22,14 +18,4 @@ type Entity struct {
 	TagID    int `avro:"tagId"`
 	MaxSpeed int `avro:"maxSpeed"`
 	Type     int `avro:"type"`
-}
-
-type MasterDataUpdate struct {
-	Operation int       `avro:"operation"`
-	DataType  int       `avro:"dataType"`
-	Key       string    `avro:"key"`
-	Anchor    Anchor    `avro:"anchor"`
-	Tag       int       `avro:"tag"`
-	Entity    Entity    `avro:"entity"`
-	Timestamp time.Time `avro:"timestamp"`
 }
