@@ -34,6 +34,7 @@ type ProcessedDistance struct {
 	IsLong             bool        `avro:"isLong"`
 	OnAnchor           bool        `avro:"onAnchor"`
 	ConfidenceLevel    int         `avro:"confidenceLevel"`
+	Timestamp          time.Time   `avro:"timestamp"`
 }
 
 type MasterDataUpdate struct {

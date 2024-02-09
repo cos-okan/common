@@ -68,6 +68,7 @@
     { "name":"isShort", "type":"boolean" },
     { "name":"isLong", "type":"boolean" },
     { "name":"onAnchor", "type":"boolean" },
-    { "name":"confidenceLevel", "type":"int" }
+    { "name":"confidenceLevel", "type":"int" },
+    {"name": "timestamp", "type": {"type": "long","logicalType": "timestamp-millis"}}
   ]
 }
