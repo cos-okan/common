@@ -48,7 +48,7 @@ func (rr *RtlsRedis) GetAllAnchorsFromRedis() map[string]Anchor {
 }
 
 func (rr *RtlsRedis) ReadAnchor(anchorKey string) (anchor Anchor, err error) {
-	jsonVal, err := rr.client.JSONGet(rr.ctx, anchorKey, "ID", "Location", "Range").Result()
+	jsonVal, err := rr.client.JSONGet(rr.ctx, anchorKey, "ID", "Location", "Range", "Sudoku").Result()
 	if err == redis.Nil || err != nil {
 		return
 	}

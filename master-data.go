@@ -10,6 +10,7 @@ type Anchor struct {
 	ID       int      `avro:"id"`
 	Location Location `avro:"location"`
 	Range    int      `avro:"range"`
+	Sudoku   int      `avro:"sudoku"`
 }
 
 type Entity struct {

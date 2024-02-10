@@ -101,6 +101,10 @@
           {
             "name": "range",
             "type": "int"
+          },
+          {
+            "name": "sudoku",
+            "type": "int"
           }
         ]
       }
