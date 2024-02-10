@@ -64,10 +64,7 @@
     },
     { "name":"projectionDistance", "type":"int" },
     { "name":"isInvalid", "type":"boolean" },
-    { "name":"isUndefined", "type":"boolean" },
-    { "name":"isOutOfRange", "type":"boolean" },
-    { "name":"isShort", "type":"boolean" },
-    { "name":"isLong", "type":"boolean" },
+    { "name":"invalidReason", "type":"int" },
     { "name":"onAnchor", "type":"boolean" },
     { "name":"confidenceLevel", "type":"int" },
     {"name": "timestamp", "type": {"type": "long","logicalType": "timestamp-millis"}}

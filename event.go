@@ -28,10 +28,7 @@ type ProcessedDistance struct {
 	Anchor             Anchor      `avro:"anchor"`
 	ProjectionDistance int         `avro:"projectionDistance"`
 	IsInvalid          bool        `avro:"isInvalid"`
-	IsUndefined        bool        `avro:"isUndefined"`
-	IsOutOfRange       bool        `avro:"isOutOfRange"`
-	IsShort            bool        `avro:"isShort"`
-	IsLong             bool        `avro:"isLong"`
+	InvalidReason      int         `avro:"invalidReason"`
 	OnAnchor           bool        `avro:"onAnchor"`
 	ConfidenceLevel    int         `avro:"confidenceLevel"`
 	Timestamp          time.Time   `avro:"timestamp"`
@@ -46,6 +43,36 @@ type MasterDataUpdate struct {
 	Entity    Entity    `avro:"entity"`
 	Timestamp time.Time `avro:"timestamp"`
 }
+
+type InvalidReason int
+
+const (
+	Undefined InvalidReason = iota + 1
+	Short
+	Long
+	OutOfRange
+	SudokuConflict
+)
+
+type ConfidenceLevel int
+
+const (
+	LowestConfidence ConfidenceLevel = iota + 1
+	LowConfidence
+	MediumConfidence
+	HighConfidence
+	HighestConfidence
+)
+
+type AccuracyLevel int
+
+const (
+	LowestAccuracy AccuracyLevel = iota + 1
+	LowAccuracy
+	MediumAccuracy
+	HighAccuracy
+	HighestAccuracy
+)
 
 func (td *TwrDistance) AvroSerializer() (data []byte, err error) {
 	data, err = avro.Marshal(twrDistanceAvroSchema, td)

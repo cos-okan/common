@@ -126,7 +126,8 @@ func (rr *RtlsRedis) WriteMockDataToRedis(anchorCount int, tagCount int) {
 					Z: 250,
 				},
 			},
-			Range: 1000,
+			Range:  1000,
+			Sudoku: i % 10,
 		}
 		aKey := fmt.Sprintf("anchor:%d", a.ID)
 		jsonValue, err := json.Marshal(a)
