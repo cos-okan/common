@@ -65,6 +65,7 @@
     { "name":"projectionDistance", "type":"int" },
     { "name":"isInvalid", "type":"boolean" },
     { "name":"invalidReason", "type":"int" },
+    { "name":"outOfRange", "type":"boolean" },
     { "name":"onAnchor", "type":"boolean" },
     { "name":"confidenceLevel", "type":"int" },
     {"name": "timestamp", "type": {"type": "long","logicalType": "timestamp-millis"}}

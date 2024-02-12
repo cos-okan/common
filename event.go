@@ -29,6 +29,7 @@ type ProcessedDistance struct {
 	ProjectionDistance int         `avro:"projectionDistance"`
 	IsInvalid          bool        `avro:"isInvalid"`
 	InvalidReason      int         `avro:"invalidReason"`
+	OutOfRange         bool        `avro:"outOfRange"`
 	OnAnchor           bool        `avro:"onAnchor"`
 	ConfidenceLevel    int         `avro:"confidenceLevel"`
 	Timestamp          time.Time   `avro:"timestamp"`
@@ -50,8 +51,10 @@ const (
 	Undefined InvalidReason = iota + 1
 	Short
 	Long
-	OutOfRange
 	SudokuConflict
+	SuspiciousTwrChange
+	IncompatibleWithEstimatedPosition
+	IncompatibleWithOtherAnchorMeasurement
 )
 
 type ConfidenceLevel int
