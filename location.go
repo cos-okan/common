@@ -8,24 +8,24 @@ const (
 )
 
 type Position struct {
-	EntityID        int      `json:"EntityID"`
-	Location        Location `json:"Location"`
-	Date            string   `json:"Date"`
-	ConfidenceLevel int      `json:"ConfidenceLevel"`
-	Speed           int      `json:"Speed"`
-	Direction       int      `json:"Direction"`
-	EstimationRange int      `json:"EstimationRange"`
+	EntityID        int      `avro:"EntityID" json:"EntityID"`
+	Location        Location `avro:"Location" json:"Location"`
+	Date            string   `avro:"Date" json:"Date"`
+	ConfidenceLevel int      `avro:"ConfidenceLevel" json:"ConfidenceLevel"`
+	Speed           int      `avro:"Speed" json:"Speed"`
+	Direction       int      `avro:"Direction" json:"Direction"`
+	EstimationRange int      `avro:"EstimationRange" json:"EstimationRange"`
 }
 
 type Point struct {
-	X int `avro:"x"`
-	Y int `avro:"y"`
-	Z int `avro:"z"`
+	X int `avro:"x" json:"x"`
+	Y int `avro:"y" json:"y"`
+	Z int `avro:"z" json:"z"`
 }
 
 type Location struct {
-	FloorID int   `avro:"floorId"`
-	Point   Point `avro:"point"`
+	FloorID int   `avro:"floorId" json:"floorId"`
+	Point   Point `avro:"point" json:"point"`
 }
 
 type Circle struct {

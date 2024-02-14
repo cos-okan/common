@@ -6,6 +6,14 @@ import (
 	"github.com/twmb/franz-go/pkg/kgo"
 )
 
+type SerializationMethod int
+
+const (
+	AvroSerialization SerializationMethod = iota + 1
+	JsonSerialization
+	ProtobufSerialization
+)
+
 type RedpandaProducer struct {
 	client *kgo.Client
 	topic  string
@@ -40,10 +48,17 @@ func NewRedpandaConsumer(brokers []string, topic string, twrConsumerGroupID stri
 	return &RedpandaConsumer{Client: client, topic: topic}
 }
 
-func (p *RedpandaProducer) SendAvroMessage(rpm AvroEvent, key []byte) {
+func (p *RedpandaProducer) SendMessage(evt Event, serializationMethod SerializationMethod, key []byte) {
 	ctx := context.Background()
 
-	serializedData, err := rpm.AvroSerializer()
+	var serializedData []byte
+	var err error
+	switch serializationMethod {
+	case AvroSerialization:
+		serializedData, err = evt.AvroSerializer()
+	case JsonSerialization:
+		serializedData, err = evt.JsonSerializer()
+	}
 
 	if err != nil {
 		return
