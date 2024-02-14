@@ -3,8 +3,8 @@ package common
 import "math"
 
 const (
-	twoCirclePerfectIntersectionDistance = 100
-	stationaryDistanceChangeThreshold    = 50
+	TwoCirclePerfectIntersectionDistance = 100
+	StationaryDistanceChangeThreshold    = 50
 )
 
 type Position struct {
@@ -61,7 +61,7 @@ func FindCircleIntersectionPoints(c1 Circle, c2 Circle) (intersections [2]Point,
 	intersections[0] = Point{X: int(cx + (h*(float64(c2.C.Y-c1.C.Y)))/d), Y: int(cy - (h*(float64(c2.C.X-c1.C.X)))/d)}
 	intersections[1] = Point{X: int(cx - (h*(float64(c2.C.Y-c1.C.Y)))/d), Y: int(cy + (h*(float64(c2.C.X-c1.C.X)))/d)}
 
-	if h*2 < twoCirclePerfectIntersectionDistance {
+	if h*2 < TwoCirclePerfectIntersectionDistance {
 		result = PerfectIntersection
 	} else {
 		result = HasIntersection
