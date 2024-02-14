@@ -1,0 +1,224 @@
+{
+  "type": "record",
+  "name": "twrGroup",
+  "fields": [
+    {
+      "name": "entityID",
+      "type": "int"
+    },
+    {
+      "name": "twrCycleNo",
+      "type": "int"
+    },
+    {
+      "name": "floorID",
+      "type": "int"
+    },
+    {
+      "name": "timestamp",
+      "type": {
+        "type": "long",
+        "logicalType": "timestamp-millis"
+      }
+    },
+    {
+      "name": "isStationary",
+      "type": "boolean"
+    },
+    {
+      "name": "anchorEventMap",
+      "type": "map",
+      "values": {
+        "type": "record",
+        "name": "processedDistance",
+        "fields": [
+          {
+            "name": "twr",
+            "type": {
+              "type": "record",
+              "name": "twrDistance",
+              "fields": [
+                {
+                  "name": "fromNodeId",
+                  "type": "int"
+                },
+                {
+                  "name": "toNodeId",
+                  "type": "int"
+                },
+                {
+                  "name": "messageNo",
+                  "type": "int"
+                },
+                {
+                  "name": "distance",
+                  "type": "int"
+                },
+                {
+                  "name": "fwConfidenceLevel",
+                  "type": "int"
+                },
+                {
+                  "name": "timestamp",
+                  "type": {
+                    "type": "long",
+                    "logicalType": "timestamp-millis"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "name": "messageType",
+            "type": "int"
+          },
+          {
+            "name": "entity",
+            "type": {
+              "type": "record",
+              "name": "entity",
+              "fields": [
+                {
+                  "name": "id",
+                  "type": "int"
+                },
+                {
+                  "name": "height",
+                  "type": "int"
+                },
+                {
+                  "name": "tagId",
+                  "type": "int"
+                },
+                {
+                  "name": "maxSpeed",
+                  "type": "int"
+                },
+                {
+                  "name": "type",
+                  "type": "int"
+                }
+              ]
+            }
+          },
+          {
+            "name": "anchor",
+            "type": {
+              "type": "record",
+              "name": "anchor",
+              "fields": [
+                {
+                  "name": "id",
+                  "type": "int"
+                },
+                {
+                  "name": "location",
+                  "type": {
+                    "type": "record",
+                    "name": "location",
+                    "fields": [
+                      {
+                        "name": "floorId",
+                        "type": "int"
+                      },
+                      {
+                        "name": "point",
+                        "type": {
+                          "type": "record",
+                          "name": "point",
+                          "fields": [
+                            {
+                              "name": "x",
+                              "type": "int"
+                            },
+                            {
+                              "name": "y",
+                              "type": "int"
+                            },
+                            {
+                              "name": "z",
+                              "type": "int"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                },
+                {
+                  "name": "range",
+                  "type": "int"
+                },
+                {
+                  "name": "sudoku",
+                  "type": "int"
+                }
+              ]
+            }
+          },
+          {
+            "name": "projectionDistance",
+            "type": "int"
+          },
+          {
+            "name": "isInvalid",
+            "type": "boolean"
+          },
+          {
+            "name": "invalidReason",
+            "type": "int"
+          },
+          {
+            "name": "outOfRange",
+            "type": "boolean"
+          },
+          {
+            "name": "onAnchor",
+            "type": "boolean"
+          },
+          {
+            "name": "confidenceLevel",
+            "type": "int"
+          },
+          {
+            "name": "timestamp",
+            "type": {
+              "type": "long",
+              "logicalType": "timestamp-millis"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "intersectionMap",
+      "type": "map",
+      "values": {
+        "name": "floorAnchorIntersectionMap",
+        "type": "map",
+        "values": {
+          "name": "anchorIntersectionMap",
+          "type": "array",
+          "items": {
+            "name": "point",
+            "type": "record",
+            "fields": [
+              {
+                "name": "X",
+                "type": "int"
+              },
+              {
+                "name": "Y",
+                "type": "int"
+              },
+              {
+                "name": "Z",
+                "type": "int"
+              }
+            ]
+          }
+        }
+      }
+    }
+  ]
+}

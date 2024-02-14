@@ -11,6 +11,7 @@ var (
 	twrDistanceAvroSchema       avro.Schema
 	mdUpdateAvroSchema          avro.Schema
 	processedDistanceAvroSchema avro.Schema
+	twrGroupAvroSchema          avro.Schema
 )
 
 //go:embed avsc/*
@@ -20,6 +21,7 @@ func PrepareAvroHelper() {
 	twrDistanceAvroSchema, _ = prepareAvroSchema("avsc/twr-distance.avsc")
 	mdUpdateAvroSchema, _ = prepareAvroSchema("avsc/md-update.avsc")
 	processedDistanceAvroSchema, _ = prepareAvroSchema("avsc/processed-distance.avsc")
+	twrGroupAvroSchema, _ = prepareAvroSchema("avsc/twr-group.avsc")
 }
 
 func prepareAvroSchema(avroSchemaFilePath string) (schema avro.Schema, err error) {

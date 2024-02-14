@@ -45,6 +45,16 @@ type MasterDataUpdate struct {
 	Timestamp time.Time `avro:"timestamp"`
 }
 
+type TwrGroup struct {
+	EntityID        int                        `avro:"entityID"`
+	TwrCycleNo      int                        `avro:"twrCycleNo"`
+	FloorID         int                        `avro:"floorID"`
+	Timestamp       time.Time                  `avro:"timestamp"`
+	IsStationary    bool                       `avro:"isStationary"`
+	AnchorEventMap  map[int]ProcessedDistance  `avro:"anchorEventMap"`
+	IntersectionMap map[int](map[int][2]Point) `avro:"intersectionMap"`
+}
+
 type InvalidReason int
 
 const (
@@ -52,15 +62,26 @@ const (
 	Short
 	Long
 	SudokuConflict
-	SuspiciousTwrChange
+	DifferentFloor
 	IncompatibleWithEstimatedPosition
+	SuspiciousTwrChange
+	StationaryControlFailure
 	IncompatibleWithOtherAnchorMeasurement
+)
+
+type TwrType int
+
+const (
+	TagToAnchor TwrType = iota + 1
+	AnchorToAnchor
+	TagToTag
 )
 
 type ConfidenceLevel int
 
 const (
-	LowestConfidence ConfidenceLevel = iota + 1
+	NoConfidence ConfidenceLevel = iota
+	LowestConfidence
 	LowConfidence
 	MediumConfidence
 	HighConfidence
@@ -111,4 +132,22 @@ func (mdu *MasterDataUpdate) AvroSerializer() (data []byte, err error) {
 
 func (mdu *MasterDataUpdate) AvroDeserializer(data []byte) (err error) {
 	return avro.Unmarshal(mdUpdateAvroSchema, data, &mdu)
+}
+
+func (twrGroup *TwrGroup) AvroSerializer() (data []byte, err error) {
+	data, err = avro.Marshal(twrGroupAvroSchema, twrGroup)
+	if err != nil {
+		log.Fatal(err)
+	}
+	return
+}
+
+func (twrGroup *TwrGroup) AvroDeserializer(data []byte) (err error) {
+	return avro.Unmarshal(twrGroupAvroSchema, data, &twrGroup)
+}
+
+func MakeInvalid(p *ProcessedDistance, invalidReason InvalidReason) {
+	p.IsInvalid = true
+	p.InvalidReason = int(invalidReason)
+	p.ConfidenceLevel = int(NoConfidence)
 }
