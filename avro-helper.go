@@ -21,7 +21,7 @@ func PrepareAvroHelper() {
 	twrDistanceAvroSchema, _ = prepareAvroSchema("avsc/twr-distance.avsc")
 	mdUpdateAvroSchema, _ = prepareAvroSchema("avsc/md-update.avsc")
 	processedDistanceAvroSchema, _ = prepareAvroSchema("avsc/processed-distance.avsc")
-	twrGroupAvroSchema, _ = prepareAvroSchema("avsc/twr-group.avsc")
+	// twrGroupAvroSchema, _ = prepareAvroSchema("avsc/twr-group.avsc") // TODO: çalışr hale getirelecek
 }
 
 func prepareAvroSchema(avroSchemaFilePath string) (schema avro.Schema, err error) {
